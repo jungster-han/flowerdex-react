@@ -1,17 +1,51 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import { createRoot } from "react-dom/client";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+//css
+import "./index.css";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function FlowerList() {
+  return (
+    <section className="flower-list">
+      <Flower
+        img={midAtlanticFlowers[0].imgSrc}
+        name={midAtlanticFlowers[0].name}
+      />
+      <Flower
+        img={midAtlanticFlowers[1].imgSrc}
+        name={midAtlanticFlowers[1].name}
+      />
+    </section>
+  );
+}
+
+const Flower = ({ img, name: { common, binomial } }) => {
+  return (
+    <article className="flower">
+      <img src={img} alt="" />
+      <h1>{common}</h1>
+      <h4>{binomial.toUpperCase()}</h4>
+    </article>
+  );
+};
+
+const midAtlanticFlowers = [
+  {
+    name: {
+      common: "Bleeding Heart",
+      binomial: "Dicentra Spectabilis",
+    },
+    imgSrc:
+      "https://www.gardenia.net/storage/app/public/uploads/images/200/DSC_0575.webp",
+  },
+  {
+    name: { common: "Bleeding Heart", binomial: "Dicentra Spectabilis" },
+    imgSrc:
+      "https://www.gardenia.net/storage/app/public/uploads/images/200/05b1e713f535fb2fbb106b9c036307bc.webp",
+  },
+];
+
+createRoot(document.getElementById("root")).render(<FlowerList />);
+
+// ReactDom render no longer supported after React 18
+// ReactDom.render(<FlowerList />, document.getElementById("root"));
